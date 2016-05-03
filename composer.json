@@ -1,0 +1,19 @@
+{
+    "name": "fzed51/helper",
+    "description": "Classes d'outils",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "fzed51",
+            "email": "fzed51+git@github.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "fzed51\\Helper\\": "./src"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0"
+    }
+}
