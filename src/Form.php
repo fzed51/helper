@@ -120,4 +120,21 @@ class Form extends HtmlElement
                 ]) . $libelle . $this->tagClose('button');
     }
 
+    public function select($name, $libelle, Array $values, $required = false)
+    {
+        $out = $this->tagStart('div', ['class' => 'form-group']) . PHP_EOL .
+                $this->label($libelle, ['for' => $name]) . PHP_EOL .
+                $this->tagStart('select', [
+                    'id' => $name,
+                    'name' => $name,
+                    'class' => 'form-control'
+                ]) . PHP_EOL;
+        foreach ($values as $key => $value) {
+            $out .= $this->tagStart('option', ['value' => $key]) . $value . $this->tagClose('option') . PHP_EOL;
+        }
+        $out .= $this->tagClose('select') . PHP_EOL .
+                $this->tagClose('div');
+        return $out;
+    }
+
 }
