@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "fzed51\\Helper\\": "./src"
+            "fzed51\\Helper\\": "src"
         }
     },
     "require": {
