@@ -82,6 +82,11 @@ class Form extends HtmlElement
                 $this->tagClose('div');
     }
 
+    function hidde($name)
+    {
+        return $this->input('hidden', $name);
+    }
+
     public function email($name, $libelle, $required = false)
     {
         return $this->tagStart('div', [ 'class' => 'form-group']) . PHP_EOL .
