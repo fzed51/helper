@@ -169,13 +169,16 @@ class Validator
     {
         $value = $this->get($key);
         return $this->saveResult(
-                        is_integer($value), $message
+                        is_numeric($value) && ($value == (int) $value), $message
         );
     }
 
-    public function isInRangeInterger($key, $min, $min_include, $max, $max_include, $message = '')
+    public function isInRange($key, $min, $min_include, $max, $max_include, $message = '')
     {
         $value = $this->get($key);
+        if (is_numeric($value)) {
+            $value = val($value);
+        }
         $test_min = is_null($min) || ($value > $min && (!$min_include || $value >= $min ));
         $test_max = is_null($max) || ($value < $min && (!$max_include || $value <= $min ));
         return $this->saveResult(
