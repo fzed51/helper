@@ -104,11 +104,24 @@ class Validator
     }
 
     /**
+     * @param string  $key
+     * @param mixed   $defaut
+     * @return mixed
+     */
+    protected function safeGet(string $key, $defaut = null)
+    {
+        if (!isset($this->data[$key])) {
+            return $defaut;
+        }
+        return $this->data[$key];
+    }
+
+    /**
      * @param bool $result
      * @param string $message
      * @return bool
      */
-    protected function saveResult(bool $result, $message)
+    protected function saveResult(bool $result, string $message): bool
     {
         if (!$result) {
             $this->valide = false;
@@ -189,6 +202,16 @@ class Validator
     public function isAlphaNumOrEmail($key, $message = '')
     {
         $value = $this->get($key);
+        return $this->saveResult(
+                        preg_match(self::PATTERN_ALPHANUM, $value) ||
+                        preg_match(self::PATTERN_EMAIL, $value)
+                        , $message
+        );
+    }
+
+    public function isBool($key, $message = '')
+    {
+        $value = (bool) ($this->safeGet($key, false));
         return $this->saveResult(
                         preg_match(self::PATTERN_ALPHANUM, $value) ||
                         preg_match(self::PATTERN_EMAIL, $value)
