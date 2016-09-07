@@ -117,6 +117,18 @@ class Validator
     }
 
     /**
+     * @param string  $key
+     * @param mixed   $defaut
+     * @return mixed
+     */
+    protected function safeSet(string $key, $value)
+    {
+        if (!isset($this->data[$key])) {
+            $this->data[$key] = $value;
+        }
+    }
+
+    /**
      * @param bool $result
      * @param string $message
      * @return bool
@@ -212,6 +224,7 @@ class Validator
     public function isBool($key, $message = '')
     {
         $value = (bool) ($this->safeGet($key, false));
+        $this->safeSet($key, $value);
         return $this->saveResult(
                         preg_match(self::PATTERN_ALPHANUM, $value) ||
                         preg_match(self::PATTERN_EMAIL, $value)
