@@ -117,6 +117,14 @@ class Validator
     }
 
     /**
+     * @return array
+     */
+    public function getAllData()
+    {
+        return $this->data;
+    }
+
+    /**
      * @param string  $key
      * @param mixed   $defaut
      * @return mixed
