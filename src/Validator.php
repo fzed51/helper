@@ -117,6 +117,32 @@ class Validator
     }
 
     /**
+     * @param string  $key
+     * @return bool
+     */
+     public function getSafeCheckBox(string $key)
+     {
+         if(!isset($this->data[$key])){
+             return false;
+         }
+         $v = $this->data[$key];
+         if(
+             is_null($v)
+             || $v == 0
+             || strtolower($v) == 'off'
+             || strtolower($v) == 'false'
+             || strtolower($v) == 'faux'
+             || strtolower($v) == 'no'
+             || strtolower($v) == 'non'
+             || strtolower($v) == 'n'
+             || !(bool)$v
+         ){
+             return false;
+         }
+         return true;
+     }
+
+    /**
      * @return array
      */
     public function getAllData()
@@ -231,11 +257,9 @@ class Validator
 
     public function isBool($key, $message = '')
     {
-        $value = (bool) ($this->safeGet($key, false));
-        $this->safeSet($key, $value);
+        $value = (bool) $this->get($key);
         return $this->saveResult(
-                        preg_match(self::PATTERN_ALPHANUM, $value) ||
-                        preg_match(self::PATTERN_EMAIL, $value)
+                        $value
                         , $message
         );
     }
