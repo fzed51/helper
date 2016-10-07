@@ -31,11 +31,9 @@ namespace fzed51\Helper;
  *
  * @author fabien.sanchez
  */
-class Form extends HtmlElement
-{
+class Form extends HtmlElement {
 
-    function start($options = [])
-    {
+    function start($options = []) {
         $defaultOptions = [
             'action' => '',
             'method' => 'POST'
@@ -44,18 +42,15 @@ class Form extends HtmlElement
         return $this->tagStart('form', $options);
     }
 
-    function end()
-    {
+    function end() {
         return $this->tagClose('form');
     }
 
-    function label($libelle, $options = [])
-    {
+    function label($libelle, $options = []) {
         return $this->tagStart('label', $options) . $libelle . $this->tagClose('label');
     }
 
-    function input($type, $name, $options = [])
-    {
+    function input($type, $name, $options = []) {
         $options['type'] = $type;
         $options['name'] = $name;
         if (!isset($options['id'])) {
@@ -71,10 +66,9 @@ class Form extends HtmlElement
      * @param bool $required
      * @return string
      */
-    function text($name, $libelle, $required = false)
-    {
-        return $this->tagStart('div', [ 'class' => 'form-group']) . PHP_EOL .
-                $this->label($libelle, [ 'for' => $name]) . PHP_EOL .
+    function text($name, $libelle, $required = false) {
+        return $this->tagStart('div', ['class' => 'form-group']) . PHP_EOL .
+                $this->label($libelle, ['for' => $name]) . PHP_EOL .
                 $this->input('text', $name, [
                     'class' => 'form-control',
                     'required' => $required
@@ -82,15 +76,13 @@ class Form extends HtmlElement
                 $this->tagClose('div');
     }
 
-    function hidde($name)
-    {
+    function hidde($name) {
         return $this->input('hidden', $name);
     }
 
-    public function email($name, $libelle, $required = false)
-    {
-        return $this->tagStart('div', [ 'class' => 'form-group']) . PHP_EOL .
-                $this->label($libelle, [ 'for' => $name]) . PHP_EOL .
+    public function email($name, $libelle, $required = false) {
+        return $this->tagStart('div', ['class' => 'form-group']) . PHP_EOL .
+                $this->label($libelle, ['for' => $name]) . PHP_EOL .
                 $this->input('email', $name, [
                     'class' => 'form-control',
                     'required' => $required
@@ -98,10 +90,9 @@ class Form extends HtmlElement
                 $this->tagClose('div');
     }
 
-    public function password($name, $libelle, $required = false)
-    {
-        return $this->tagStart('div', [ 'class' => 'form-group']) . PHP_EOL .
-                $this->label($libelle, [ 'for' => $name]) . PHP_EOL .
+    public function password($name, $libelle, $required = false) {
+        return $this->tagStart('div', ['class' => 'form-group']) . PHP_EOL .
+                $this->label($libelle, ['for' => $name]) . PHP_EOL .
                 $this->input('password', $name, [
                     'class' => 'form-control',
                     'required' => $required
@@ -109,8 +100,7 @@ class Form extends HtmlElement
                 $this->tagClose('div');
     }
 
-    public function checkBox($name, $libelle)
-    {
+    public function checkBox($name, $libelle) {
         return $this->tagStart('div', ['class' => 'form-group']) . PHP_EOL .
                 $this->tagStart('label') . PHP_EOL .
                 $this->input('checkbox', $name) . ' ' . $libelle . PHP_EOL .
@@ -118,15 +108,13 @@ class Form extends HtmlElement
                 $this->tagClose('div');
     }
 
-    public function submit($libelle)
-    {
+    public function submit($libelle, $options) {
         return $this->tagStart('button', [
                     'class' => 'btn btn-primary'
                 ]) . $libelle . $this->tagClose('button');
     }
 
-    public function select($name, $libelle, Array $values, $required = false)
-    {
+    public function select($name, $libelle, Array $values, $required = false) {
         $out = $this->tagStart('div', ['class' => 'form-group']) . PHP_EOL .
                 $this->label($libelle, ['for' => $name]) . PHP_EOL .
                 $this->tagStart('select', [
